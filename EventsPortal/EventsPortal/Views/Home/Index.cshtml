@@ -1,0 +1,57 @@
+﻿<style>
+    body {
+        margin-top:20px;
+        background-color: #343a40; 
+        color: #ffffff; 
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    .container {
+        margin-top: 50px; 
+        flex: 1;
+        padding-bottom: 60px; 
+        text-align: center; 
+    }
+
+    .btn-container {
+        margin-top: 20px; 
+    }
+
+    .btn-lg {
+        margin: 10px; 
+        font-size: 24px; 
+    }
+
+    .btn-locations {
+        background-color: #6c757d; 
+        border-color: #6c757d; 
+        color: #ffffff; 
+    }
+
+    .btn-packages {
+        background-color: #cad2c5; 
+        border-color: #cad2c5; 
+        color: #ffffff; 
+    }
+
+    .btn-create-event {
+        background-color: #84a98c; 
+        border-color: #84a98c;
+        color: #ffffff; 
+    }
+
+    .btn-primary:hover {
+        opacity: 0.8; 
+    }
+</style>
+
+<div class="container text-center">
+    <h1 class="display-4">Luxury Events</h1>
+    <div class="btn-container">
+        <a href="@Url.Action("Index", "Location")" class="btn btn-lg btn-primary btn-locations">See our Locations</a>
+        <a href="@Url.Action("Index", "Package")" class="btn btn-lg btn-primary btn-packages">See our Packages</a>
+        <a href="@Url.Action("Create", "Event")" class="btn btn-lg btn-primary btn-create-event">Create your event</a>
+    </div>
+</div>
