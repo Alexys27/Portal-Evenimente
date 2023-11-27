@@ -1,0 +1,98 @@
+﻿@model EventsPortal.Models.LocationModel
+
+@{
+    ViewData["Title"] = "LocationDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        margin-top:20px;
+        background-color: #343a40; /* Set your desired dark background color */
+        color: #ffffff; /* Set text color */
+        padding-top: 20px; /* Adjust padding as needed */
+    }
+
+    .container {
+        margin-top: 20px; /* Adjust margin as needed */
+        text-align: center; /* Center the content */
+    }
+
+    h1, h4 {
+        color: #ffffff; /* Set heading text color */
+    }
+
+    hr {
+        background-color: #ffffff; /* Set horizontal rule color */
+    }
+
+    .row {
+        margin-bottom: 20px; /* Adjust margin as needed */
+    }
+
+    dl {
+        text-align: left; /* Align definition list text to the left */
+    }
+
+    dt, dd {
+        color: #ffffff; /* Set definition term and description text color */
+    }
+
+    img {
+        max-width: 100%; /* Ensure the image doesn't exceed its container */
+        height: auto; /* Maintain image aspect ratio */
+        margin: 20px 0; /* Add margin for spacing */
+    }
+
+    a {
+        color: #007bff; /* Set link text color */
+    }
+
+        a:hover {
+            color: #0056b3; /* Set link text color on hover */
+        }
+</style>
+
+<div class="container">
+    <h1>Location Details</h1>
+
+    <div class="row">
+        <div class="col-sm-10">
+            <hr />
+            <dl class="row">
+                <dd class="col-sm-10" hidden>
+                    @Html.DisplayFor(model => model.LocationID)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.LocationName)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.LocationName)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.LocationAdress)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.LocationAdress)
+                </dd>
+                <dt class="col-sm-2">
+                    Image
+                </dt>
+                <dd class="col-sm-10">
+                    @if (!string.IsNullOrEmpty(Model.ImagePath))
+                    {
+                        <img src="@Model.ImagePath" alt="Location Image" class="img-fluid" />
+                    }
+                    else
+                    {
+                        <p>No image available</p>
+                    }
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>

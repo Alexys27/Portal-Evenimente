@@ -1,0 +1,55 @@
+﻿@model IEnumerable<EventsPortal.Models.AdditionalServiceModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th hidden>
+                @Html.DisplayNameFor(model => model.ServiceID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ServiceName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdditionalPrice)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td hidden>
+                @Html.DisplayFor(modelItem => item.ServiceID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServiceName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdditionalPrice)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.ServiceID  })
+            </td>
+                @if (User.IsInRole("Admin"))
+                {
+                    <td>
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ServiceID  })
+                    </td>
+                }
+        </tr>
+}
+    </tbody>
+</table>

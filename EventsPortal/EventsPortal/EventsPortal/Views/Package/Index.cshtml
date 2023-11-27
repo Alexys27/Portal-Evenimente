@@ -1,0 +1,102 @@
+﻿@model IEnumerable<EventsPortal.Models.PackageModel>
+
+@{
+    ViewData["Title"] = "Packages";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        margin-top: 50px;
+        background-color: #343a40; /* Set your desired dark background color */
+        color: #ffffff; /* Set text color */
+        padding-top: 20px; /* Adjust padding as needed */
+    }
+
+    .container {
+        margin-top: 20px; /* Adjust margin as needed */
+    }
+
+    section {
+        background-color: #495057; /* Set your desired section background color */
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        position: relative;
+        cursor: pointer; /* Add cursor pointer for better user interaction */
+        transition: background-color 0.3s; /* Add transition for smoother effect */
+    }
+
+        section:hover {
+            background-color: #596675; /* Set a lighter background color on hover */
+        }
+
+    h2 {
+        color: #ffffff; /* Set heading text color */
+    }
+
+    p {
+        color: #ffffff; /* Set paragraph text color */
+        margin-bottom: 10px; /* Adjust margin as needed */
+    }
+
+    .btn-group .btn {
+        color: #ffffff; /* Set button text color */
+    }
+
+        .btn-group .btn:hover {
+            background-color: transparent; /* Set button background color on hover */
+        }
+
+    .details-btn {
+        display: none; /* Initially hide the details button */
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+    }
+</style>
+
+<script>
+    // JavaScript to handle section click and trigger details action
+    document.addEventListener("DOMContentLoaded", function () {
+        var sections = document.querySelectorAll("section");
+
+        sections.forEach(function (section) {
+            section.addEventListener("click", function () {
+                var detailsBtn = section.querySelector(".details-btn");
+                if (detailsBtn) {
+                    detailsBtn.click();
+                }
+            });
+        });
+    });
+</script>
+
+<div class="container">
+    <h1 class="display-4">Packages</h1>
+    @if (User.IsInRole("Admin"))
+    {
+        <p>
+            <a asp-action="Create" class="btn btn-primary">Create New Package</a>
+        </p>
+
+    }
+
+    @foreach (var item in Model)
+    {
+        <section>
+            <h2>@Html.DisplayFor(modelItem => item.PackageName)</h2>
+            <p>@Html.DisplayFor(modelItem => item.PackageDescription)</p>
+            <p>Price per Participant: @Html.DisplayFor(modelItem => item.PricePerParticipant)</p>
+            @if (User.IsInRole("Admin"))
+            {
+
+                <div class="btn-group" role="group">
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.PackageID">Edit</a>
+                </div>
+            }
+
+            <a class="btn btn-secondary details-btn" asp-action="Details" asp-route-id="@item.PackageID">Details</a>
+        </section>
+    }
+</div>

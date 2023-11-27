@@ -1,0 +1,101 @@
+﻿@model EventsPortal.Models.UserRequestModel
+
+@{
+    ViewData["Title"] = "CreateUserRequest";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        margin-top: 50px;
+        background-color: #343a40;
+        color: #ffffff;
+        padding-top: 20px; 
+    }
+
+    .container {
+        margin-top: 20px; 
+        text-align: center; 
+    }
+
+    h1, h4 {
+        color: #ffffff; 
+    }
+
+    hr {
+        background-color: #ffffff;
+    }
+
+    .form-section {
+        background-color: #495057;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px; 
+        color: #ffffff; 
+    }
+
+    input,
+    textarea {
+        background-color: #6c757d; 
+        color: #ffffff; 
+    }
+
+    .btn-primary {
+        background-color: #007bff; 
+        border-color: #007bff; 
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3; 
+            border-color: #0056b3; 
+        }
+</style>
+
+<div class="container">
+    <h1>Leave a message for us</h1>
+
+    <h4>Your message:</h4>
+    <hr />
+
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <form asp-action="Create" class="form-section">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="RequestType" class="control-label">Request Type</label>
+                    <input asp-for="RequestType" class="form-control" />
+                    <span asp-validation-for="RequestType" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="AdditionalInfo" class="control-label">Additional Info</label>
+                    <textarea asp-for="AdditionalInfo" class="form-control"></textarea>
+                    <span asp-validation-for="AdditionalInfo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UserName" class="control-label">User Name</label>
+                    <input asp-for="UserName" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UserEmail" class="control-label">User Email</label>
+                    <input asp-for="UserEmail" class="form-control" />
+                    <span asp-validation-for="UserEmail" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

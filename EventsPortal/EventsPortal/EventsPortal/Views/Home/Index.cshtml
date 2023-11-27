@@ -1,0 +1,57 @@
+﻿<style>
+    body {
+        margin-top:20px;
+        background-color: #343a40; /* Set your desired dark background color */
+        color: #ffffff; /* Set text color */
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    .container {
+        margin-top: 50px; /* Adjust margin as needed */
+        flex: 1;
+        padding-bottom: 60px; /* Adjust padding to make sure the content is above the footer */
+        text-align: center; /* Center the content */
+    }
+
+    .btn-container {
+        margin-top: 20px; /* Adjust margin as needed */
+    }
+
+    .btn-lg {
+        margin: 10px; /* Adjust margin as needed */
+        font-size: 24px; /* Adjust font size as needed */
+    }
+
+    .btn-locations {
+        background-color: #6c757d; /* Set your desired button color for Locations */
+        border-color: #6c757d; /* Set your desired button border color */
+        color: #ffffff; /* Set text color for the button */
+    }
+
+    .btn-packages {
+        background-color: #cad2c5; /* Set your desired button color for Packages */
+        border-color: #cad2c5; /* Set your desired button border color */
+        color: #ffffff; /* Set text color for the button */
+    }
+
+    .btn-create-event {
+        background-color: #84a98c; /* Set your desired button color for Create Event */
+        border-color: #84a98c; /* Set your desired button border color */
+        color: #ffffff; /* Set text color for the button */
+    }
+
+    .btn-primary:hover {
+        opacity: 0.8; /* Set the desired opacity on hover */
+    }
+</style>
+
+<div class="container text-center">
+    <h1 class="display-4">Luxury Events</h1>
+    <div class="btn-container">
+        <a href="@Url.Action("Index", "Location")" class="btn btn-lg btn-primary btn-locations">See our Locations</a>
+        <a href="@Url.Action("Index", "Package")" class="btn btn-lg btn-primary btn-packages">See our Packages</a>
+        <a href="@Url.Action("Create", "Event")" class="btn btn-lg btn-primary btn-create-event">Create your event</a>
+    </div>
+</div>

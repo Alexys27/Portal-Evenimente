@@ -1,0 +1,181 @@
+﻿@model EventsPortal.Models.EventModel
+
+@{
+    ViewData["Title"] = "CreateEvent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    body {
+        margin-top:50px;
+        background-color: #343a40; /* Set your desired dark background color */
+        color: #ffffff; /* Set text color */
+        padding-top: 20px; /* Adjust padding as needed */
+    }
+
+    .container {
+        margin-top: 20px; /* Adjust margin as needed */
+        text-align: center; /* Center the content */
+    }
+
+    .form-section {
+        background-color: #495057; /* Set your desired section background color */
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        cursor: pointer; /* Add cursor pointer for better user interaction */
+    }
+
+        .form-section:hover {
+            background-color: #6c757d; /* Set the background color on hover */
+        }
+
+    .radio-section, .checkbox-section {
+        margin-bottom: 10px; /* Adjust margin as needed */
+    }
+
+        .checkbox-section:hover, .radio-section:hover {
+            background-color: #6c757d; /* Set the background color on hover */
+        }
+
+    label {
+        display: block; /* Display labels as block elements for better spacing */
+        margin-bottom: 5px; /* Adjust margin as needed */
+    }
+
+    .checkbox-label {
+        display: inline-block; /* Display checkbox labels inline */
+        margin-right: 10px; /* Adjust margin as needed */
+    }
+
+    .radio-btn {
+        display: none; /* Hide the default radio buttons */
+    }
+
+        .radio-btn + label {
+            padding: 10px;
+            display: inline-block;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease; /* Add transition for smooth color change */
+        }
+
+        .radio-btn:checked + label {
+            background-color: #4285f4; /* Set the background color when checked */
+            color: #ffffff; /* Set text color when checked */
+        }
+
+    .checkbox-btn {
+        display: none; /* Hide the default checkboxes */
+    }
+
+        .checkbox-btn + label {
+            padding: 10px;
+            display: inline-block;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease; /* Add transition for smooth color change */
+        }
+
+        .checkbox-btn:checked + label {
+            background-color: #4285f4; /* Set the background color when checked */
+            color: #ffffff; /* Set text color when checked */
+        }
+</style>
+
+<div class="container">
+    <h1 class="display-4">Create Event</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <form asp-action="Create" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-section radio-section">
+                    <label>Select Package</label>
+                    @foreach (var package in ViewBag.Packages)
+                    {
+                        <input type="radio" name="SelectedPackageID" value="@package.Value" id="package_@package.Value" class="radio-btn" />
+                        <label for="package_@package.Value">@package.Text</label>
+                    }
+                    <span asp-validation-for="SelectedPackageID" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="SelectedAdditionalServiceNames" class="form-control" hidden />
+                </div>
+                <div class="form-group">
+                    <input asp-for="SelectedPackageName" class="form-control" hidden />
+                </div>
+                <div class="form-group">
+                    <input asp-for="LocationName" class="form-control" hidden />
+                </div>
+                <div class="form-section">
+                    <label asp-for="EventType">Event Type</label>
+                    <input asp-for="EventType" class="form-control" />
+                    <span asp-validation-for="EventType" class="text-danger"></span>
+                </div>
+
+                <div class="form-section">
+                    <label asp-for="Participants">Participants</label>
+                    <input asp-for="Participants" class="form-control" />
+                    <span asp-validation-for="Participants" class="text-danger"></span>
+                </div>
+
+                <div class="form-section">
+                    <label asp-for="EventDate">Event Date</label>
+                    <input asp-for="EventDate" class="form-control" type="date" />
+                    <span asp-validation-for="EventDate" class="text-danger"></span>
+                </div>
+
+                <div class="form-section">
+                    <label>Select Location</label>
+                    <select asp-for="LocationID" asp-items="@ViewBag.Locations" class="form-control">
+                        <option value="">Select a location</option>
+                    </select>
+                    <span asp-validation-for="LocationID" class="text-danger"></span>
+                </div>
+
+                <div class="form-section checkbox-section">
+                    <label>Select Additional Services</label>
+                    @foreach (var additionalService in ViewBag.AdditionalServices)
+                    {
+                        <input type="checkbox" name="SelectedAdditionalServices" value="@additionalService.ServiceID" id="service_@additionalService.ServiceID" class="checkbox-btn" />
+                        <label for="service_@additionalService.ServiceID" class="checkbox-label">@additionalService.ServiceName</label>
+                    }
+                    <span asp-validation-for="SelectedAdditionalServices" class="text-danger"></span>
+                </div>
+                <div class="form-section">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var createEventForm = document.getElementById("createEventForm");
+
+            if (createEventForm) {
+                createEventForm.addEventListener("submit", function (event) {
+                    if (!createEventForm.checkValidity()) {
+                        // If the form is not valid, prevent submission
+                        event.preventDefault();
+                        event.stopPropagation();
+                    } else {
+                        // If the form is valid, reset the form after submission
+                        createEventForm.reset();
+                    }
+                });
+            }
+        });
+    </script>
+}
